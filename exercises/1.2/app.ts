@@ -3,12 +3,9 @@ import router from "./routes/films";
 
 const app = express();
 
-export default app;
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.use("/films", router);
 
 /*Middleware pour compter le nb de GET*/
 
@@ -21,3 +18,6 @@ app.use((req, _res, next) => {  //Comme il est attaché à app.use sans précise
     next();
 });
 
+app.use("/films",router); //Mettre les middlewares avant les routes pour qu'ils puissent s'éxecuter
+
+export default app;
