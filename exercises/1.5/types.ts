@@ -9,6 +9,6 @@ interface Film {
   imageUrl? : string ;
 }
 
-type NewFilm = Omit<Film, "id">; //prend le type film mais enlève la propriété id
+type NewFilm = Omit<Film, "id">;
 
 export type {Film, NewFilm};
