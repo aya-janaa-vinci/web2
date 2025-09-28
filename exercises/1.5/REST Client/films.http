@@ -17,26 +17,3 @@ Content-Type: application/json
     "budget": 500
 }
 
-### -----------------------------------------------------
-DELETE http://localhost:3000/films/1
-
-###-----------------------------------------------------------
-
-PATCH http://localhost:3000/films/3 
-Content-Type: application/json
-
-{
-    "title":"One piece",
-    "budget": 200000
-}
-
-###
-PUT http://localhost:3000/films/3
-Content-Type: application/json
-
-{
-    "title":"Mega Mindy",
-    "duration": 120,
-    "director": "Mindy Mindy",
-    "budget": 1230000
-}

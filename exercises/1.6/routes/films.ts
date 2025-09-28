@@ -123,6 +123,115 @@ router.post("/",(req, res) => {
     });
 
             
+//ex 1.6 : DELETE ONE : Effacer la ressource identifiée
+
+router.delete("/:id", (req, res) => {
+  const id = Number(req.params.id);
+  if (isNaN(id)) {
+    return res.status(400).send("id must be a valid number");
+  }
+  const index = films.findIndex((film) => id === film.id);
+
+  if (index === -1) {
+    return res.status(404).send("film not found");
+  }
+  const deletedFilm = films[index];
+
+  films.splice(index, 1); // 1 = supprimer 1 élément à partir de cet index
+
+  return res.status(200).json(deletedFilm);
+});
+
+//UPDATE ONE : Mettre à jour les propriétés de la ressource par les valeurs données dans la requête, pour une ou plusieurs propriétés
+
+router.patch("/:id", (req, res) => {
+  const id = Number(req.params.id);
+  if (isNaN(id)) {
+    return res.status(400).send("id must be a valid number");
+  }
+  const filmToUpdate = films.find((film) => film.id === id);
+
+  if (!filmToUpdate) {
+    return res.status(404).send("Film not found");
+  }
+  const body: unknown = req.body;
+
+  if (
+    !body ||
+    typeof body != "object" ||
+    Object.keys(body).length === 0 ||
+    ("title" in body &&
+      (typeof body.title !== "string" || !body.title.trim())) ||
+    ("director" in body &&
+      (typeof body.director !== "string" || !body.director.trim())) ||
+    ("duration" in body &&
+      (typeof body.duration !== "number" || body.duration <= 0)) ||
+    ("budget" in body &&
+      (typeof body.budget !== "number" || body.budget <= 0)) ||
+    ("description" in body &&
+      (typeof body.description !== "string" || !body.description.trim())) ||
+    ("imageUrl" in body &&
+      (typeof body.imageUrl !== "string" || !body.imageUrl.trim()))
+  ) {
+    return res.sendStatus(400);
+  }
+  const updatedFilm = { ...filmToUpdate, ...body }; //copie toutes les propriétés envoyées dans la requête (body) et écrase celles qui existent déjà dans filmToUpdate.
+
+films[films.indexOf(filmToUpdate)] = updatedFilm;
+
+  return res.status(200).json(updatedFilm);
+});
+
+
+//UPDATE ONE or CREATE ONE : Remplacer la ressource par une ressource reprenant les valeurs 
+// données dans la requête, seulement si toutes les propriétés non optionnelles de la ressource 
+// sont données ! Si la ressource n'existe pas, créer cette ressource seulement si l'id donné n'est pas déjà existant.
+
+router.put("/:id", (req, res) => {
+  const body: unknown = req.body;
+
+  if (
+    !body ||
+    typeof body !== "object" ||
+    !("title" in body) ||
+    !("director" in body) ||
+    !("duration" in body) ||
+    typeof body.title !== "string" ||
+    typeof body.director !== "string" ||
+    typeof body.duration !== "number" ||
+    !body.title.trim() ||
+    !body.director.trim() ||
+    body.duration <= 0 ||
+    ("budget" in body &&
+      (typeof body.budget !== "number" || body.budget <= 0)) ||
+    ("description" in body &&
+      (typeof body.description !== "string" || !body.description.trim())) ||
+    ("imageUrl" in body &&
+      (typeof body.imageUrl !== "string" || !body.imageUrl.trim()))
+  ) {
+    return res.sendStatus(400);
+  }
+  const id = Number(req.params.id);
+  if(isNaN(id)){
+    return res.status(400).send("id must be a valid number");
+  }
+
+  const indexOfFilmToUpdate = films.findIndex((film) => film.id === id);
+  if(indexOfFilmToUpdate < 0){
+    const newFilm = body as NewFilm;
+  
+  const nextId = films.reduce((acc, film) => (film.id > acc ? film.id : acc), 0)+1;
+
+  const addedFilm = { id : nextId, ...newFilm}
+  films.push(addedFilm);
+  return res.status(200).json(addedFilm);
+}
+const updatedFilm = {...films[indexOfFilmToUpdate], ...body} as Film;
+
+films[indexOfFilmToUpdate] = updatedFilm;
+
+return res.status(200).json(updatedFilm);
+});
 
 
 export default router;

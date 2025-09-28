@@ -1,7 +1,7 @@
 GET http://localhost:3000/films/?minimum-duration=100
 
 ###
-GET http://localhost:3000/films/1
+GET http://localhost:3000/films/
 
 ###
 POST http://localhost:3000/films/
@@ -14,3 +14,26 @@ Content-Type: application/json
     "budget": 500
 }
 
+### -----------------------------------------------------
+DELETE http://localhost:3000/films/2
+
+###-----------------------------------------------------------
+
+PATCH http://localhost:3000/films/3 
+Content-Type: application/json
+
+{
+    "title":"One piece",
+    "budget": 200000
+}
+
+###
+PUT http://localhost:3000/films/543
+Content-Type: application/json
+
+{
+    "title":"Mega Mindy",
+    "duration": 120,
+    "director": "Mindy Mindy",
+    "budget": 1230000
+}
