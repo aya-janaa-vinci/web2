@@ -1,0 +1,16 @@
+GET http://localhost:3000/films/?minimum-duration=100
+
+###
+GET http://localhost:3000/films/1
+
+###
+POST http://localhost:3000/films/
+Content-Type: application/json
+
+{
+    "title":"Bella Vida",
+    "duration": 100,
+    "director": "Camilla Cabello",
+    "budget": 500
+}
+
