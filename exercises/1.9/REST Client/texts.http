@@ -1,0 +1,39 @@
+GET http://localhost:3000/texts/
+
+###
+GET http://localhost:3000/films/3
+
+###
+POST http://localhost:3000/films/
+Content-Type: application/json
+
+{
+    "title":"Bella",
+    "duration": 100,
+    "director": "Camilla Gims",
+    "budget": 500
+}
+
+### -----------------------------------------------------
+DELETE http://localhost:3000/films/5
+
+###-----------------------------------------------------------
+
+PATCH http://localhost:3000/films/3 
+Content-Type: application/json
+
+{
+    "title":"One piece",
+    "budget": 2003000
+}
+
+###
+PUT http://localhost:3000/films/3
+Content-Type: application/json
+
+{
+    "title":"Mega Mindy",
+    "duration": 120,
+    "director": "Mindy Mindy",
+    "budget": 1230000
+}
