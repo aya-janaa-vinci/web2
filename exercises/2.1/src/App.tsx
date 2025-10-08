@@ -39,23 +39,17 @@ const App = () => {
   );
 };
 
-interface PageTitleProps {
-  title : string;
-}
-
-const PageTitle = (props : PageTitleProps) => {
+const PageTitle = (props: { title: string }) => {
 return <h1>{props.title}</h1>;
 };
 
-interface CinemaProps {
-  name : string ;
-  movie1Title : string ;
-  movie1Director : string ;
-  movie2Title : string ;
-  movie2Director : string ;
-}
-
-const Cinema = (props : CinemaProps) => {
+const Cinema = (props: {
+  name: string;
+  movie1Title: string;
+  movie1Director: string;
+  movie2Title: string;
+  movie2Director: string;
+}) => {
 return (
 <div>
   <h2>{props.name}</h2>
