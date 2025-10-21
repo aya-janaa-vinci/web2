@@ -2,9 +2,12 @@ import { useState } from 'react'
 
 interface ClickCounterProps{
 title : string ;
+on10ClickMessage? : string;
 }
 
-const ClickCounter = ({title}:ClickCounterProps) => {
+const ClickCounter = ({title,
+    on10ClickMessage = "You are a master in the art of clicking !"}
+    :ClickCounterProps) => {
     const [count, setCount] = useState(0)
 
 return(
@@ -13,9 +16,7 @@ return(
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
         </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
+        {count >= 10 ? <p>{on10ClickMessage}</p> : null}
       </div>
 );
 };
