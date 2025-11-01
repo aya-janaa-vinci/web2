@@ -26,7 +26,7 @@ router.get("/",(req,res)=>{
     //ex 1.3 : READ ONE : Lire la ressource identifiée
 
 router.get("/:id",(req,res)=>{
-const id = Number(req.params.id)
+const id = Number(req.params.id);
 
     if(isNaN(id)){
         return res.sendStatus(400);
