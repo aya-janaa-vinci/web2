@@ -13,4 +13,14 @@ interface Drink {
   price: string;
 }
 
-export type { Pizza, NewPizza, Drink };
+interface PizzeriaContext {
+  pizzas : Pizza[];
+  setPizzas : (pizzas : Pizza[]) => void;
+  actionToBePerformed: boolean;
+  setActionToBePerformed: (actionToBePerformed: boolean) => void;
+  clearActionToBePerformed: () => void;
+  drinks: Drink[];
+  addPizza: (newPizza: NewPizza) => void;
+}
+
+export type { Pizza, NewPizza, Drink, PizzeriaContext };
