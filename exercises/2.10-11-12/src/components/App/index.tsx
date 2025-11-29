@@ -80,7 +80,7 @@ const App = () => {
       </Header>
 
       <main className="page-content">
-        <Outlet context={ movieContext } /> {/* Ici, le contenu des routes enfants sera affiché */}
+        <Outlet context={ movieContext } /> {/* Ici, le contenu des routes enfants sera affiché, contexte = n'importe quelle donnée ou fonction que nous souhaitons partager avec les routes "enfants". */}
       </main>
 
       <Footer urlLogo="https://media.istockphoto.com/id/1202770152/fr/photo/bobine-de-film-disolement-sur-le-fond-jaune-lumineux-dans-les-couleurs-pastel.jpg?s=1024x1024&w=is&k=20&c=2yKBrC8oyimPdW-5IxFWN_zxFPVK3KWYL9OE2gVmVX4=">
