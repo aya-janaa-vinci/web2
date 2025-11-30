@@ -65,7 +65,7 @@ const App = () => {
   const [pizzas, setPizzas] = useState<Pizza[]>([]);
 
 useEffect(() => {
-    fetch("http://localhost:3000/pizzas")
+    fetch("http://localhost:3000/pizzas") //retourne une Promise
       .then((response) => {
         if (!response.ok)
           throw new Error(
