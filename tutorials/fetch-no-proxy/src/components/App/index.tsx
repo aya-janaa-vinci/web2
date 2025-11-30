@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import "./App.css";
 import Footer from "../Footer";
@@ -6,7 +6,7 @@ import Header from "../Header";
 import { Drink, NewPizza, Pizza, PizzeriaContext } from "../../types";
 import NavBar from "../Navbar";
 
-const defaultPizzas: Pizza[] = [
+/*const defaultPizzas: Pizza[] = [
   {
     id: 1,
     title: "4 fromages",
@@ -33,6 +33,7 @@ const defaultPizzas: Pizza[] = [
     content: "Tomates, Mozarella, Chorizo piquant, Jalapenos",
   },
 ];
+*/
 
 const drinks: Drink[] = [
   {
@@ -58,9 +59,26 @@ const drinks: Drink[] = [
   },
 ];
 
+
 const App = () => {
   const [actionToBePerformed, setActionToBePerformed] = useState(false);
-  const [pizzas, setPizzas] = useState(defaultPizzas);
+  const [pizzas, setPizzas] = useState<Pizza[]>([]);
+
+useEffect(() => {
+    fetch("http://localhost:3000/pizzas")
+      .then((response) => {
+        if (!response.ok)
+          throw new Error(
+            `fetch error : ${response.status} : ${response.statusText}`
+          );
+        return response.json();
+      })
+      .then((pizzas) => setPizzas(pizzas))
+      .catch((err) => {
+        console.error("HomePage::error: ", err);
+      });
+  }, []); //tab vide [] → aucune dépendance = l'effet ne s’exécute qu’1 seule fois, juste après le 1er rendu.
+
 
   const addPizza = (newPizza: NewPizza) => {
     const pizzaAdded = { ...newPizza, id: nextPizzaId(pizzas) };
