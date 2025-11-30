@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react";
-import "./App.css";
 import type { Joke } from "./types";
 
 const App = () => {
   const [joke, setJoke] = useState<Joke | undefined>(undefined);
 
-  useEffect(() => {
+  const fetchJoke = () => {
     fetch("https://v2.jokeapi.dev/joke/Any?type=single")
       .then((response) => {
         return response.json();
@@ -16,7 +15,12 @@ const App = () => {
           text: data.joke ?? "No joke found",
         });
       });
-  }, []);
+  };
+
+useEffect(() => {
+  fetchJoke();
+  setInterval(fetchJoke, 10000);
+}, []);
 
   if(!joke){
     return <p>Loading...</p>
