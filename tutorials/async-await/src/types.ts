@@ -20,7 +20,7 @@ interface PizzeriaContext {
   setActionToBePerformed: (actionToBePerformed: boolean) => void;
   clearActionToBePerformed: () => void;
   drinks: Drink[];
-  addPizza: (newPizza: NewPizza) => void;
+  addPizza: (newPizza: NewPizza) => Promise<void>; //C'est une Promise qui est retournée par la fonction addPizza.
 }
 
 export type { Pizza, NewPizza, Drink, PizzeriaContext };

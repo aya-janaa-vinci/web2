@@ -20,6 +20,11 @@ const RandomDog = () => {
       }
     };
     fetchDogImage();
+
+    const intervalId = setInterval(() => {
+      fetchDogImage();
+    }, 5000);
+    return () => clearInterval(intervalId);
   }, []);
 
   if (!dog) {
