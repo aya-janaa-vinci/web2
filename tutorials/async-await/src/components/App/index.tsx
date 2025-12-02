@@ -62,7 +62,7 @@ const App = () => {
     }
   };
 
-  async function getAllPizzas() { // fonction asynchrone qui renvoient une promesse.
+  async function getAllPizzas() { // fonction asynchrone qui renvoie une promesse.
     try {
       const response = await fetch("http://localhost:3000/pizzas");
 
