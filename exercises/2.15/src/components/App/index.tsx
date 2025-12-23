@@ -36,7 +36,7 @@ const App = () => {
     }
   };
   
-  const movieContext: MovieContext = {
+  const movieContext: MovieContext = { //Donne aux pg enfants la liste des films et la fonction pour en ajouter
     movies,
     onMovieAdded,
   };
