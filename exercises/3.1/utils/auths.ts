@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import jwt from "jsonwebtoken";
 import { readOneUserFromUsername } from "../services/users";
 import { NextFunction, RequestHandler, Response } from "express";
@@ -10,13 +11,13 @@ const authorize = (
   res: Response,
   next: NextFunction
 ) => {
-  const token = req.get("authorization");
-  if (!token) {
+  const token = req.get("authorization"); //recupère "authorization" dans le corps de la requete
+  if (!token) { //si pas présent dans le corps, accès refusé
     return res.sendStatus(401);
   }
 
   try {
-    const decoded = jwt.verify(token, jwtSecret) as JwtPayload;
+    const decoded = jwt.verify(token, jwtSecret) as JwtPayload; //Si le token est valide, jwt.verify retourne le payload décodé.
     const { username } = decoded;
 
     const existingUser = readOneUserFromUsername(username);
