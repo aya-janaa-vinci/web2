@@ -4,6 +4,7 @@ import cors from "cors";
 import usersRouter from "./routes/users";
 import authsRouter from "./routes/auths";
 import filmsRouter from "./routes/films";
+import commentsRouter from "./routes/comments";
 
 
 const app = express();
@@ -28,6 +29,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use("/users", usersRouter);
 app.use("/auths", authsRouter);
 app.use("/films", filmsRouter);
+app.use("/comments", commentsRouter);
 
 const errorHandler: ErrorRequestHandler = (err, _req, res, _next) => {
   console.error(err.stack);

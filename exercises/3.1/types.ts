@@ -35,6 +35,12 @@ interface JwtPayload {
   iat: number; // Issued at time (in seconds since the epoch)
 }
 
+interface Comment {
+  filmId: number;
+  username: string;
+  comment: string
+}
+
 export type {
   Film,
   NewFilm,
@@ -43,4 +49,5 @@ export type {
   PotentialUser,
   AuthenticatedRequest,
   JwtPayload,
+  Comment
 };

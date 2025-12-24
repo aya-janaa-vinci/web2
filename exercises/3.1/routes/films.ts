@@ -3,11 +3,11 @@ import { NewFilm } from "../types";
 import { readAllFilms, readFilmById, createFilm, deleteFilm, updateFilm, updateOrCreateFilm } from "../services/films" ;
 import { authorize } from "../utils/auths";
 
-const filmsRouter = Router();
+const router = Router();
 
     //ex 1.3 : READ ALL FILTERED : Lire toutes les ressources de la collection selon le filtre donné
 
-filmsRouter.get("/",(req,res)=>{
+router.get("/",(req,res)=>{
  const minDuration =
     "minimum-duration" in req.query
       ? Number(req.query["minimum-duration"])
@@ -26,7 +26,7 @@ filmsRouter.get("/",(req,res)=>{
 
     //ex 1.3 : READ ONE : Lire la ressource identifiée
 
-filmsRouter.get("/:id",(req,res)=>{
+router.get("/:id",(req,res)=>{
 const id = Number(req.params.id);
 
     if(isNaN(id)){
@@ -43,7 +43,7 @@ return res.json(film);
 
     //ex 1.3 :  CREATE ONE : Créer une ressource basée sur les données de la requête
 
-filmsRouter.post("/", authorize,(req, res) => {
+router.post("/", authorize,(req, res) => {
     const body: unknown = req.body;
 
     if(
@@ -81,7 +81,7 @@ return res.json(addedFilm);
             
 //ex 1.6 : DELETE ONE : Effacer la ressource identifiée
 
-filmsRouter.delete("/:id", authorize, (req, res) => {
+router.delete("/:id", authorize, (req, res) => {
   const id = Number(req.params.id);
   if (isNaN(id)) {
     return res.status(400).send("id must be a valid number");
@@ -96,7 +96,7 @@ filmsRouter.delete("/:id", authorize, (req, res) => {
 
 //UPDATE ONE : Mettre à jour les propriétés de la ressource par les valeurs données dans la requête, pour une ou plusieurs propriétés
 
-filmsRouter.patch("/:id",authorize, (req, res) => {
+router.patch("/:id",authorize, (req, res) => {
   const id = Number(req.params.id);
   if (isNaN(id)) {
     return res.status(400).send("id must be a valid number");
@@ -135,7 +135,7 @@ if(!updatedFilm){
 // données dans la requête, seulement si toutes les propriétés non optionnelles de la ressource 
 // sont données ! Si la ressource n'existe pas, créer cette ressource seulement si l'id donné n'est pas déjà existant.
 
-filmsRouter.put("/:id",authorize, (req, res) => {
+router.put("/:id",authorize, (req, res) => {
   const body: unknown = req.body;
 
   if (
@@ -172,4 +172,4 @@ filmsRouter.put("/:id",authorize, (req, res) => {
 });
 
 
-export default filmsRouter;
+export default router;
