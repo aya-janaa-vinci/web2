@@ -115,12 +115,16 @@ app.use(cors(corsOptions));
 # Crédit :
 - La configuration du projet pour utiliser TS & le linter a été reprise du cours de Fullstack Open (`Typing an Express app` : https://fullstackopen.com/en/part9/typing_an_express_app ainsi que via https://github.com/fullstack-hy2020/flight-diary).
 
+
+
 # API DE FILMS
 | URI | Méthode HTTP | Auths ? | Opération |
 |---|---|---|---|
-|**`films`**| GET | NON | READ ALL : Lire toutes les ressources de la collection |
+|**`films`**| GET | Non | READ ALL : Lire toutes les ressources de la collection |
 | **`films/:id`** | GET | Non | READ ALL : Lire une ressource de la collection |
 | **`films`** | POST | Oui | CREATE ONE : Créer une ressource de la collection basée sur un body au format `{title: string; director: string;  duration: number;  budget?: number;  description?: string;  imageUrl?: string;  }` |
+| **`films/:id`** | PATCH | Oui | UPDATE ONE : Modifier une ressource de la collection basée sur un body au format {title?: string; director?: string;  duration?: number;  budget?: number;  description?: string;  imageUrl?: string;  } en devant fournir au moins une propriété valide |
+| **`films/:id`** | PUT | Oui | UPDATE ONE or CREATE ONE : Modifier une ressource de la collection si l'id existe, sinon créer une nouvelle ressource. Le format du body d'une requête {title: string; director: string;  duration: number;  budget?: number;  description?: string;  imageUrl?: string;  } |
 
 
 # API DE COMMENTAIRES
@@ -128,7 +132,7 @@ app.use(cors(corsOptions));
 |---|---|---|---|
 | **`comments?film=filmId`** | GET | JWT | READ ALL FILTERED : Lire toutes les ressources de la collection filtrée sur base d'un film |
 | **`comments`** | POST | JWT | CREATE ONE : Créer une ressource basée sur un body au format `{filmId: number; comment:string; }`; le username est sécurisé via le token |
-| **`comments?/films/:filmId`** | DELETE | JWT | DELETE ONE : Effacer le commentaire d'un utilisateur ou d'une utilisatrice sur un film sur base du filmId se trouvant dans l'URL et du username sécurisé dans le token. |
+| **`comments/films/:filmId`** | DELETE | JWT | DELETE ONE : Effacer le commentaire d'un utilisateur ou d'une utilisatrice sur un film sur base du filmId se trouvant dans l'URL et du username sécurisé dans le token. |
 | ... | ... | ... | ... |
 
 # API d'authentification
